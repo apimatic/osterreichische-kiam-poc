@@ -16,7 +16,7 @@ jobs:
 
       - name: Zip BuildFiles and send to APIMatic
         run: |
-          echo "Zipping BuildFiles in ${{ matrix.directory }}..."
+          echo "Zipping BuildFiles in directory..."
           zip -r portal-input.zip . -x .github/ -x README.md > /dev/null
           echo "Zipped BuildFiles successfully."
 
