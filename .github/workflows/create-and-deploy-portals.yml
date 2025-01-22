@@ -17,7 +17,7 @@ jobs:
       - name: Zip BuildFiles and send to APIMatic
         run: |
           echo "Zipping BuildFiles in directory..."
-          zip -r portal-input.zip . -x .github/ -x README.md > /dev/null
+          zip -r portal-input.zip . -x .github/\* -x README.md -x .git/\* > /dev/null
           echo "Zipped BuildFiles successfully."
 
           echo "Sending zip to APIMatic..."
