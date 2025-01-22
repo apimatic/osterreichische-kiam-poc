@@ -1,0 +1,116 @@
+name: Create and deploy portal
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Zip BuildFiles and send to APIMatic
+        run: |
+          echo "Zipping BuildFiles in ${{ matrix.directory }}..."
+          zip -r portal-input.zip . -x .github/ -x README.md > /dev/null
+          echo "Zipped BuildFiles successfully."
+
+          echo "Sending zip to APIMatic..."
+          RESPONSE=$(curl -s --output response.zip --write-out '%{http_code}\t%{content_type}' --request POST \
+                      --url 'https://api.apimatic.io/portal' \
+                      -H 'Authorization: X-Auth-Key ${{ secrets.APIMATIC_API_KEY }}' \
+                      -F "file=@portal-input.zip")
+          
+          echo "Raw curl response: $RESPONSE"
+          HTTP_CODE=$(echo "$RESPONSE" | cut -f1)
+          CONTENT_TYPE=$(echo "$RESPONSE" | cut -f2)
+
+          if [ "$HTTP_CODE" -ne 200 ]; then
+            echo "APIMatic transformer failed with HTTP_CODE=$HTTP_CODE. Exiting."
+            exit 1
+          fi
+
+          echo "Request successful. Unzipping response..."
+          mkdir -p Portal
+          unzip -qq response.zip -d Portal
+          ls Portal
+
+      - name: Check and Create Cloudflare Project if Needed
+        run: |
+          PROJECT_NAME=apimatic-poc-338
+          echo "Checking if Cloudflare project '$PROJECT_NAME' exists..."
+
+          PAGE=1
+          EXISTING_PROJECTS=""
+
+          while true; do
+            # Make the API request for the current page
+            RESPONSE=$(curl -s --request GET \
+              --url "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects?page=$PAGE" \
+              --header 'Content-Type: application/json' \
+              -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}")
+
+            # Append project names from the current page to the variable
+
+            PROJECTS=$(echo "$RESPONSE" | jq -r '.result[]?.name // empty')
+
+            EXISTING_PROJECTS+="$PROJECTS"$'\n'
+
+            # Check if more pages exist
+            
+            TOTAL_PAGES=$(echo "$RESPONSE" | jq -r '.result_info.total_pages // 0')
+            
+            if [ "$PAGE" -ge "$TOTAL_PAGES" ]; then
+              break
+            fi
+
+            PAGE=$((PAGE + 1))
+          done
+
+          # Output all projects
+          echo "$EXISTING_PROJECTS"
+
+          # Check if the current project name exists in the list
+          if echo "$EXISTING_PROJECTS" | grep -q "^$PROJECT_NAME$"; then
+            echo "Project '$PROJECT_NAME' already exists on Cloudflare."
+          else
+            echo "Project '$PROJECT_NAME' not found. Creating new Cloudflare project..."
+
+            # Create the new project
+            CREATE_RESPONSE=$(curl -s --request POST \
+              --url https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects \
+              --header 'Content-Type: application/json' \
+              -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+              --data '{
+                "name": "'"$PROJECT_NAME"'",
+                "production_branch": "main"
+              }')
+
+            # Check if the project creation was successful
+            if echo "$CREATE_RESPONSE" | jq -e '.success' > /dev/null; then
+              echo "Successfully created Cloudflare project '$PROJECT_NAME'."
+            else
+              echo "Failed to create Cloudflare project '$PROJECT_NAME'. Response: $CREATE_RESPONSE"
+              exit 1
+            fi
+          fi
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy Portal --project-name=apimatic-poc-338
+
+      - name: Upload portal zip file as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: portal-zip
+          path: response.zip
+
+      

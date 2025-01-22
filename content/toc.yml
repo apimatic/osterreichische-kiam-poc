@@ -1,0 +1,11 @@
+toc:
+- generate: Setting Up SDKs
+  from: getting-started
+- group: Guided Walkthroughs
+  items:
+  - page: User Registration Walkthrough
+    file: guided-walkthroughs/sample-walkthrough.md
+- generate: API Endpoints
+  from: endpoints      
+- generate: Models
+  from: models

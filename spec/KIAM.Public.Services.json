@@ -1,0 +1,806 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Kiam Public Service",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern"
+    }
+  ],
+  "paths": {
+    "/companies": {
+      "post": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Creates company with related business user if captcha validation passes",
+        "operationId": "CreateCompanyWithBusinessUser",
+        "parameters": [
+          {
+            "name": "captchaToken",
+            "in": "header",
+            "description": "This parameter is used to provide the captcha specific value for a token, solution or how else a parameter is called in a captcha solution.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Data of the newly created company and related user.\r\n             User salutation can have values M or W, M means male and W means female, X means other.\r\n             Possible values for users' address type: 1 or 2. 1 means main address, 2 means secondary address.\r\n             If password is not defined or is null, created user will receive an e-mail and will have to set password using received link.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanyRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanyRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User was created successfully."
+          },
+          "400": {
+            "description": "Invalid request.\r\n            \r\n             Usual invalid request response format:\r\n             Error code is validation_error. Information about the error can be found in the details field.\r\n             Target describes which field is invalid, validation error code defines the more detailed validation error case.\r\n             There could be multiple errors per field. See example response.\r\n            \r\n             List of error codes in format [error code] - [optional description] - [fields which can have this validation error] for user fields and company fields:\r\n            \r\n             Company fields\r\n            \r\n             required - company_name\r\n             invalid - company_legal_form_id, company_email_address, company_phone_country_code, company_phone_area_code, company_phone_number, company_mobile_country_code, company_mobile_area_code, company_mobile_number, company_countryIsoAlpha2Code\r\n            \r\n             User fields\r\n             \r\n             required -  Required field. - username, first_name, last_name, registration_origin\r\n             username_not_available - Username is already taken. - username\r\n             too_short - The input value is too short. - username, first_name, last_name\r\n             too_long - The input value is too long. - username, first_name, last_name\r\n             no_titles_allowed - No titles allowed, E.g. BSc. - first_name, last_name\r\n             no_company_types_allowed - No company types allowed. E.g. GmbH. - first_name, last_name\r\n             person_too_young - Person with specified birthdate is too young. - birthdate\r\n             invalid - first_name, last_name, username, phone_country_code, phone_area_code, phone_number, mobile_country_code, mobile_area_code, mobile_number, user_addressX_countryIsoAlpha2Code (where X is the index of the address in the array, starting from 0, e.G. user_address0_countryIsoAlpha2Code)\r\n             new_password_invalid - the new password is invalid - password\r\n             captcha_error - Invalid Captcha token."
+          }
+        }
+      }
+    },
+    "/doubleOptIn/initiate": {
+      "post": {
+        "tags": [
+          "DoubleOptIn"
+        ],
+        "summary": "Sends registration confirmation request (double-opt-in).",
+        "operationId": "ResendRegistrationConfirmation",
+        "requestBody": {
+          "description": "Request with username (email address) of the user.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResendRegistrationConfirmationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResendRegistrationConfirmationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResendRegistrationConfirmationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Registration confirmation e-mail was sent."
+          },
+          "404": {
+            "description": "User with username was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                },
+                "example": {
+  "error": {
+    "code": "not_found",
+    "message": "Resource not found.",
+    "details": [
+      null
+    ]
+  }
+}
+              }
+            }
+          },
+          "409": {
+            "description": "An error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                },
+                "example": {
+  "error": {
+    "code": "not_found",
+    "message": "Resource not found.",
+    "details": [
+      null
+    ]
+  }
+}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/doubleOptIn/confirm": {
+      "post": {
+        "tags": [
+          "DoubleOptIn"
+        ],
+        "summary": "Confirms user registration (double-opt-in).",
+        "operationId": "ConfirmRegistration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmRegistrationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmRegistrationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmRegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Registration confirmation token accepted. Response contains callback URL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationConfirmationResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Invalid, expired or already used registration confirmation token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                },
+                "example": {
+  "error": {
+    "code": "not_found",
+    "message": "Resource not found.",
+    "details": [
+      null
+    ]
+  }
+}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "PublicUser"
+        ],
+        "operationId": "CreateUser",
+        "parameters": [
+          {
+            "name": "captchaToken",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/validations/validateUsername": {
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Validates username.",
+        "operationId": "ValidateUsername",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringFieldValue"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringFieldValue"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringFieldValue"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Value is valid."
+          },
+          "200": {
+            "description": "Value is invalid. Main error code is validation_error.\r\n            Detailed validation error codes can be found in the details field.\r\n            There could be multiple errors.\r\n            \r\n            List of error codes in format [error code] - [description]:\r\n            \r\n            required -  Required field.\r\n            invalid - Invalid format, username should be an email address.\r\n            too_short - The input value is too short.\r\n            too_long - The input value is too long.\r\n            username_not_available - Username is already taken.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                },
+                "example": {
+  "error": {
+    "code": "validation_error",
+    "message": "Error description for developers.",
+    "details": [
+      {
+        "code": "error_code_example_1",
+        "message": "Error description for developers.",
+        "target": "fieldName1",
+        "details": []
+      },
+      {
+        "code": "error_code_example_2",
+        "message": "Error description for developers.",
+        "target": "fieldName2",
+        "details": []
+      }
+    ]
+  }
+}
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                },
+                "example": {
+  "error": {
+    "code": "validation_error",
+    "message": "Error description for developers.",
+    "details": [
+      {
+        "code": "error_code_example_1",
+        "message": "Error description for developers.",
+        "target": "fieldName1",
+        "details": []
+      },
+      {
+        "code": "error_code_example_2",
+        "message": "Error description for developers.",
+        "target": "fieldName2",
+        "details": []
+      }
+    ]
+  }
+}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/validations/validateDuplicateUser": {
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Validates if user data is a duplicate or not.\r\nOnly main address is considered for duplicate check.\r\nSsoId and door number are optional parameters.\r\nIf SsoId is specified, user with that SsoId is excluded from the validation.\r\nIf door number is not specified it will not be filtered for it.",
+        "operationId": "ValidateForDuplicateUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateForDuplicateUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateForDuplicateUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateForDuplicateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Data is valid, it is not a duplicate user."
+          },
+          "200": {
+            "description": "Data is invalid, a user with the same data already exists. Main error code is validation_error.\r\n            Validation error code is duplicate_user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                },
+                "example": {
+  "error": {
+    "code": "validation_error",
+    "message": "Error description for developers.",
+    "details": [
+      {
+        "code": "error_code_example_1",
+        "message": "Error description for developers.",
+        "target": "fieldName1",
+        "details": []
+      },
+      {
+        "code": "error_code_example_2",
+        "message": "Error description for developers.",
+        "target": "fieldName2",
+        "details": []
+      }
+    ]
+  }
+}
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error code is duplicate_user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                },
+                "example": {
+  "error": {
+    "code": "validation_error",
+    "message": "Error description for developers.",
+    "details": [
+      {
+        "code": "error_code_example_1",
+        "message": "Error description for developers.",
+        "target": "fieldName1",
+        "details": []
+      },
+      {
+        "code": "error_code_example_2",
+        "message": "Error description for developers.",
+        "target": "fieldName2",
+        "details": []
+      }
+    ]
+  }
+}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddressForDuplicateValidation": {
+        "type": "object",
+        "properties": {
+          "countryIsoAlpha2Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "doorNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "houseNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConfirmRegistrationRequest": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "applicationName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateAddressRequest": {
+        "type": "object",
+        "properties": {
+          "addressType": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "countryIsoAlpha2Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "street2": {
+            "type": "string",
+            "nullable": true
+          },
+          "doorNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "houseNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "postAddressCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCompanyRequest": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/CreateUserRequest"
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "$ref": "#/components/schemas/Phone2"
+          },
+          "mobile": {
+            "$ref": "#/components/schemas/Phone2"
+          },
+          "mainAddress": {
+            "$ref": "#/components/schemas/CreateMainAddressRequest"
+          },
+          "registrationSucceededCallbackUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "uid": {
+            "type": "string",
+            "nullable": true
+          },
+          "legalFormId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "organizationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "sapDebitor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateMainAddressRequest": {
+        "type": "object",
+        "properties": {
+          "countryIsoAlpha2Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "street2": {
+            "type": "string",
+            "nullable": true
+          },
+          "doorNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "houseNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "postAddressCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUserRequest": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "salutation": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "titleBeforeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "titleAfterName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "$ref": "#/components/schemas/Phone2"
+          },
+          "mobile": {
+            "$ref": "#/components/schemas/Phone2"
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateAddressRequest"
+            },
+            "nullable": true
+          },
+          "registrationSucceededCallbackUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationOrigin": {
+            "type": "string",
+            "nullable": true
+          },
+          "marketingAgreement": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "newsletter": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Phone2": {
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "areaCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegistrationConfirmationResponse": {
+        "type": "object",
+        "properties": {
+          "callbackUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResendRegistrationConfirmationRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "applicationName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringFieldValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValidateForDuplicateUserRequest": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "ssoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mainAddress": {
+            "$ref": "#/components/schemas/AddressForDuplicateValidation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "KiamProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/Legacy.ErrorInfo"
+          }
+        },
+        "additionalProperties": { }
+      },
+      "Legacy.ErrorData": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Legacy.ErrorInfo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "target": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Legacy.ErrorData"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
