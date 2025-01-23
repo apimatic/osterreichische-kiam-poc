@@ -27,10 +27,11 @@ jobs:
       id: generate-portal
       run: | 
         RESPONSE=`curl -s --write-out '%{http_code}\t%{content_type}' --request POST --url 'https://api.apimatic.io/portal' \
-          -H 'Authorization:X-Auth-Key ${{ secrets.API_KEY }}' -F 'file=@portal-input.zip' -OJ`;
+          -H 'Authorization:X-Auth-Key ${{ secrets.APIMATIC_API_KEY }}' -F 'file=@portal-input.zip' -OJ`;
         
         HTTP_CODE=$(echo $RESPONSE | cut -d " " -f 1);
         CONTENT_TYPE=$(echo $RESPONSE | cut -d " " -f 2);
+
         echo "HTTP_CODE=$HTTP_CODE" >> $GITHUB_OUTPUT;
         echo "CONTENT_TYPE=$CONTENT_TYPE" >> $GITHUB_OUTPUT;
 
@@ -49,7 +50,7 @@ jobs:
       uses: nwtgck/actions-netlify@v2.0
       with:
         publish-dir: './static-portal'
-        production-branch: master
+        production-branch: main
         github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: "Deploy from GitHub Actions"
         enable-pull-request-comment: false
