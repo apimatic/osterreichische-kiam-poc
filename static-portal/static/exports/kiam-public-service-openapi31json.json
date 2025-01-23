@@ -1,0 +1,867 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Kiam Public Service",
+    "contact": {},
+    "version": "1.0.0"
+  },
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "servers": [
+    {
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/companies": {
+      "post": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "CreateCompanyWithBusinessUser",
+        "description": "",
+        "operationId": "CreateCompanyWithBusinessUser",
+        "parameters": [
+          {
+            "name": "captchaToken",
+            "in": "header",
+            "description": "This parameter is used to provide the captcha specific value for a token, solution or how else a parameter is called in a captcha solution.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Data of the newly created company and related user.\r\n             User salutation can have values M or W, M means male and W means female, X means other.\r\n             Possible values for users' address type: 1 or 2. 1 means main address, 2 means secondary address.\r\n             If password is not defined or is null, created user will receive an e-mail and will have to set password using received link.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateCompanyRequest"
+                  },
+                  {
+                    "description": "Data of the newly created company and related user.\r\n             User salutation can have values M or W, M means male and W means female, X means other.\r\n             Possible values for users' address type: 1 or 2. 1 means main address, 2 means secondary address.\r\n             If password is not defined or is null, created user will receive an e-mail and will have to set password using received link."
+                  }
+                ],
+                "contentMediaType": "application/json"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "User was created successfully.",
+            "headers": {},
+            "content": {}
+          },
+          "400": {
+            "description": "Invalid request.\r\n            \r\n             Usual invalid request response format:\r\n             Error code is validation_error. Information about the error can be found in the details field.\r\n             Target describes which field is invalid, validation error code defines the more detailed validation error case.\r\n             There could be multiple errors per field. See example response.\r\n            \r\n             List of error codes in format [error code] - [optional description] - [fields which can have this validation error] for user fields and company fields:\r\n            \r\n             Company fields\r\n            \r\n             required - company_name\r\n             invalid - company_legal_form_id, company_email_address, company_phone_country_code, company_phone_area_code, company_phone_number, company_mobile_country_code, company_mobile_area_code, company_mobile_number, company_countryIsoAlpha2Code\r\n            \r\n             User fields\r\n             \r\n             required -  Required field. - username, first_name, last_name, registration_origin\r\n             username_not_available - Username is already taken. - username\r\n             too_short - The input value is too short. - username, first_name, last_name\r\n             too_long - The input value is too long. - username, first_name, last_name\r\n             no_titles_allowed - No titles allowed, E.g. BSc. - first_name, last_name\r\n             no_company_types_allowed - No company types allowed. E.g. GmbH. - first_name, last_name\r\n             person_too_young - Person with specified birthdate is too young. - birthdate\r\n             invalid - first_name, last_name, username, phone_country_code, phone_area_code, phone_number, mobile_country_code, mobile_area_code, mobile_number, user_addressX_countryIsoAlpha2Code (where X is the index of the address in the array, starting from 0, e.G. user_address0_countryIsoAlpha2Code)\r\n             new_password_invalid - the new password is invalid - password\r\n             captcha_error - Invalid Captcha token.",
+            "headers": {},
+            "content": {}
+          }
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    },
+    "/doubleOptIn/initiate": {
+      "post": {
+        "tags": [
+          "DoubleOptIn"
+        ],
+        "summary": "ResendRegistrationConfirmation",
+        "description": "",
+        "operationId": "ResendRegistrationConfirmation",
+        "parameters": [],
+        "requestBody": {
+          "description": "Request with username (email address) of the user.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ResendRegistrationConfirmationRequest"
+                  },
+                  {
+                    "description": "Request with username (email address) of the user."
+                  }
+                ],
+                "contentMediaType": "application/json"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "Registration confirmation e-mail was sent.",
+            "headers": {},
+            "content": {}
+          },
+          "404": {
+            "description": "User with username was not found.",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "An error occurred",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    },
+    "/doubleOptIn/confirm": {
+      "post": {
+        "tags": [
+          "DoubleOptIn"
+        ],
+        "summary": "ConfirmRegistration",
+        "description": "",
+        "operationId": "ConfirmRegistration",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmRegistrationRequest"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "202": {
+            "description": "Registration confirmation token accepted. Response contains callback URL.",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationConfirmationResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Invalid, expired or already used registration confirmation token.",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "PublicUser"
+        ],
+        "summary": "CreateUser",
+        "description": "",
+        "operationId": "CreateUser",
+        "parameters": [
+          {
+            "name": "captchaToken",
+            "in": "header",
+            "description": "",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {},
+            "content": {}
+          }
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    },
+    "/validations/validateUsername": {
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "ValidateUsername",
+        "description": "",
+        "operationId": "ValidateUsername",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StringFieldValue"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "Value is valid.",
+            "headers": {},
+            "content": {}
+          },
+          "200": {
+            "description": "Value is invalid. Main error code is validation_error.\r\n            Detailed validation error codes can be found in the details field.\r\n            There could be multiple errors.\r\n            \r\n            List of error codes in format [error code] - [description]:\r\n            \r\n            required -  Required field.\r\n            invalid - Invalid format, username should be an email address.\r\n            too_short - The input value is too short.\r\n            too_long - The input value is too long.\r\n            username_not_available - Username is already taken.",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    },
+    "/validations/validateDuplicateUser": {
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "ValidateForDuplicateUser",
+        "description": "",
+        "operationId": "ValidateForDuplicateUser",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateForDuplicateUserRequest"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "Data is valid, it is not a duplicate user.",
+            "headers": {},
+            "content": {}
+          },
+          "200": {
+            "description": "Data is invalid, a user with the same data already exists. Main error code is validation_error.\r\n            Validation error code is duplicate_user",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error code is duplicate_user",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KiamProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddressForDuplicateValidation": {
+        "title": "AddressForDuplicateValidation",
+        "type": "object",
+        "properties": {
+          "countryIsoAlpha2Code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "postalCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "doorNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "houseNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "ConfirmRegistrationRequest": {
+        "title": "ConfirmRegistrationRequest",
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "applicationName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "CreateAddressRequest": {
+        "title": "CreateAddressRequest",
+        "type": "object",
+        "properties": {
+          "addressType": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "contentEncoding": "int32"
+          },
+          "countryIsoAlpha2Code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "postalCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street2": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "doorNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "houseNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "postAddressCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "CreateCompanyRequest": {
+        "title": "CreateCompanyRequest",
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/CreateUserRequest"
+          },
+          "companyName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "emailAddress": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phone": {
+            "$ref": "#/components/schemas/Phone2"
+          },
+          "mobile": {
+            "$ref": "#/components/schemas/Phone2"
+          },
+          "mainAddress": {
+            "$ref": "#/components/schemas/CreateMainAddressRequest"
+          },
+          "registrationSucceededCallbackUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "uid": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "legalFormId": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "contentEncoding": "int32"
+          },
+          "organizationNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sapDebitor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "CreateMainAddressRequest": {
+        "title": "CreateMainAddressRequest",
+        "type": "object",
+        "properties": {
+          "countryIsoAlpha2Code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "postalCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "street2": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "doorNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "houseNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "postAddressCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "CreateUserRequest": {
+        "title": "CreateUserRequest",
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "username": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "salutation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "firstname": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastname": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "birthdate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "contentEncoding": "date-time"
+          },
+          "titleBeforeName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "titleAfterName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phone": {
+            "$ref": "#/components/schemas/Phone2"
+          },
+          "mobile": {
+            "$ref": "#/components/schemas/Phone2"
+          },
+          "addresses": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/CreateAddressRequest"
+            },
+            "description": ""
+          },
+          "registrationSucceededCallbackUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "registrationOrigin": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "marketingAgreement": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "newsletter": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      "Phone2": {
+        "title": "Phone2",
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "areaCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "RegistrationConfirmationResponse": {
+        "title": "RegistrationConfirmationResponse",
+        "type": "object",
+        "properties": {
+          "callbackUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "ResendRegistrationConfirmationRequest": {
+        "title": "ResendRegistrationConfirmationRequest",
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "applicationName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "StringFieldValue": {
+        "title": "StringFieldValue",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "ValidateForDuplicateUserRequest": {
+        "title": "ValidateForDuplicateUserRequest",
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastname": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ssoId": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "contentEncoding": "int32"
+          },
+          "mainAddress": {
+            "$ref": "#/components/schemas/AddressForDuplicateValidation"
+          }
+        }
+      },
+      "KiamProblemDetails": {
+        "title": "KiamProblemDetails",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "contentEncoding": "int32"
+          },
+          "detail": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "instance": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "error": {
+            "$ref": "#/components/schemas/Legacy.ErrorInfo"
+          }
+        },
+        "additionalProperties": {}
+      },
+      "Legacy.ErrorData": {
+        "title": "Legacy.ErrorData",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "Legacy.ErrorInfo": {
+        "title": "Legacy.ErrorInfo",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "message": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "target": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "data": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/Legacy.ErrorData"
+            },
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Company",
+      "description": ""
+    },
+    {
+      "name": "DoubleOptIn",
+      "description": ""
+    },
+    {
+      "name": "PublicUser",
+      "description": ""
+    },
+    {
+      "name": "Validations",
+      "description": ""
+    }
+  ]
+}

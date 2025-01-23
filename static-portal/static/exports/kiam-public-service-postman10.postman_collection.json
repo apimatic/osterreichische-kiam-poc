@@ -1,0 +1,409 @@
+{
+  "id": "2a27a377-86ef-4e11-8c4f-3864c7b493ad",
+  "name": "Kiam Public Service",
+  "order": [],
+  "folders": [
+    {
+      "id": "923ca59a-d4c0-423d-a091-3f9b2622f058",
+      "name": "Company",
+      "description": "",
+      "order": [
+        "b1a14b7c-c415-4cb9-8633-a84311e16407"
+      ],
+      "collection_id": "2a27a377-86ef-4e11-8c4f-3864c7b493ad"
+    },
+    {
+      "id": "661a20c2-ad9e-4a39-81ed-d27562be5586",
+      "name": "DoubleOptIn",
+      "description": "",
+      "order": [
+        "f23b12b6-05f0-40d4-97dd-97e48575f50e",
+        "6b3d94cd-2dd7-4a92-9198-3b24daf8c3d4"
+      ],
+      "collection_id": "2a27a377-86ef-4e11-8c4f-3864c7b493ad"
+    },
+    {
+      "id": "555784fa-625d-4506-92e5-75a645995c29",
+      "name": "PublicUser",
+      "description": "",
+      "order": [
+        "bd7a48fa-8361-42e8-a10b-ae663486fc51"
+      ],
+      "collection_id": "2a27a377-86ef-4e11-8c4f-3864c7b493ad"
+    },
+    {
+      "id": "f0da158d-d2bf-4d14-876e-3d625c493024",
+      "name": "Validations",
+      "description": "",
+      "order": [
+        "7244590e-aedc-492d-9c0c-c0fc71534507",
+        "6b617603-d107-4cd2-be6b-fcfae329ba9c"
+      ],
+      "collection_id": "2a27a377-86ef-4e11-8c4f-3864c7b493ad"
+    }
+  ],
+  "requests": [
+    {
+      "folder": "923ca59a-d4c0-423d-a091-3f9b2622f058",
+      "id": "b1a14b7c-c415-4cb9-8633-a84311e16407",
+      "name": "CreateCompanyWithBusinessUser",
+      "dataMode": "raw",
+      "dataDisabled": false,
+      "descriptionFormat": "markdown",
+      "description": "",
+      "headers": "Content-Type:application/json\r\ncaptchaToken:captchaToken63\r\nAccept:*/*\r\n",
+      "method": "POST",
+      "currentHelper": "",
+      "pathVariables": {},
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/companies",
+      "responses": [
+        {
+          "request": "b1a14b7c-c415-4cb9-8633-a84311e16407",
+          "id": "58c390a1-2111-45d2-87d4-457b62b9fcc9",
+          "name": "Response_200",
+          "status": "User was created successfully.",
+          "responseCode": {
+            "code": 200,
+            "name": "200",
+            "detail": "User was created successfully."
+          },
+          "headers": [],
+          "language": "Text"
+        },
+        {
+          "request": "b1a14b7c-c415-4cb9-8633-a84311e16407",
+          "id": "aa494496-5104-43c3-8eec-e111b752d6a5",
+          "name": "Response_400",
+          "status": "Invalid request.\r\n            \r\n             Usual invalid request response format:\r\n             Error code is validation_error. Information about the error can be found in the details field.\r\n             Target describes which field is invalid, validation error code defines the more detailed validation error case.\r\n             There could be multiple errors per field. See example response.\r\n            \r\n             List of error codes in format [error code] - [optional description] - [fields which can have this validation error] for user fields and company fields:\r\n            \r\n             Company fields\r\n            \r\n             required - company_name\r\n             invalid - company_legal_form_id, company_email_address, company_phone_country_code, company_phone_area_code, company_phone_number, company_mobile_country_code, company_mobile_area_code, company_mobile_number, company_countryIsoAlpha2Code\r\n            \r\n             User fields\r\n             \r\n             required -  Required field. - username, first_name, last_name, registration_origin\r\n             username_not_available - Username is already taken. - username\r\n             too_short - The input value is too short. - username, first_name, last_name\r\n             too_long - The input value is too long. - username, first_name, last_name\r\n             no_titles_allowed - No titles allowed, E.g. BSc. - first_name, last_name\r\n             no_company_types_allowed - No company types allowed. E.g. GmbH. - first_name, last_name\r\n             person_too_young - Person with specified birthdate is too young. - birthdate\r\n             invalid - first_name, last_name, username, phone_country_code, phone_area_code, phone_number, mobile_country_code, mobile_area_code, mobile_number, user_addressX_countryIsoAlpha2Code (where X is the index of the address in the array, starting from 0, e.G. user_address0_countryIsoAlpha2Code)\r\n             new_password_invalid - the new password is invalid - password\r\n             captcha_error - Invalid Captcha token.",
+          "responseCode": {
+            "code": 400,
+            "name": "400",
+            "detail": "Invalid request.\r\n            \r\n             Usual invalid request response format:\r\n             Error code is validation_error. Information about the error can be found in the details field.\r\n             Target describes which field is invalid, validation error code defines the more detailed validation error case.\r\n             There could be multiple errors per field. See example response.\r\n            \r\n             List of error codes in format [error code] - [optional description] - [fields which can have this validation error] for user fields and company fields:\r\n            \r\n             Company fields\r\n            \r\n             required - company_name\r\n             invalid - company_legal_form_id, company_email_address, company_phone_country_code, company_phone_area_code, company_phone_number, company_mobile_country_code, company_mobile_area_code, company_mobile_number, company_countryIsoAlpha2Code\r\n            \r\n             User fields\r\n             \r\n             required -  Required field. - username, first_name, last_name, registration_origin\r\n             username_not_available - Username is already taken. - username\r\n             too_short - The input value is too short. - username, first_name, last_name\r\n             too_long - The input value is too long. - username, first_name, last_name\r\n             no_titles_allowed - No titles allowed, E.g. BSc. - first_name, last_name\r\n             no_company_types_allowed - No company types allowed. E.g. GmbH. - first_name, last_name\r\n             person_too_young - Person with specified birthdate is too young. - birthdate\r\n             invalid - first_name, last_name, username, phone_country_code, phone_area_code, phone_number, mobile_country_code, mobile_area_code, mobile_number, user_addressX_countryIsoAlpha2Code (where X is the index of the address in the array, starting from 0, e.G. user_address0_countryIsoAlpha2Code)\r\n             new_password_invalid - the new password is invalid - password\r\n             captcha_error - Invalid Captcha token."
+          },
+          "headers": [],
+          "language": "Text"
+        }
+      ],
+      "rawModeData": "{\r\n  \"user\": {\r\n    \"password\": \"password64\",\r\n    \"username\": \"username84\",\r\n    \"salutation\": \"salutation13\",\r\n    \"firstname\": \"firstname82\",\r\n    \"lastname\": \"lastname87\",\r\n    \"birthdate\": \"2025-02-05T10:39:00.9077906Z\",\r\n    \"titleBeforeName\": \"titleBeforeName2\",\r\n    \"titleAfterName\": \"titleAfterName50\",\r\n    \"phone\": {\r\n      \"countryCode\": \"countryCode93\",\r\n      \"areaCode\": \"areaCode98\",\r\n      \"number\": \"number92\"\r\n    },\r\n    \"mobile\": {\r\n      \"countryCode\": \"countryCode93\",\r\n      \"areaCode\": \"areaCode98\",\r\n      \"number\": \"number92\"\r\n    },\r\n    \"addresses\": [\r\n      {\r\n        \"addressType\": 115,\r\n        \"countryIsoAlpha2Code\": \"countryIsoAlpha2Code42\",\r\n        \"postalCode\": \"postalCode19\",\r\n        \"city\": \"city22\",\r\n        \"street\": \"street48\",\r\n        \"street2\": \"street244\",\r\n        \"doorNumber\": \"doorNumber39\",\r\n        \"houseNumber\": \"houseNumber64\",\r\n        \"postAddressCode\": \"postAddressCode59\"\r\n      }\r\n    ],\r\n    \"registrationSucceededCallbackUrl\": \"registrationSucceededCallbackUrl52\",\r\n    \"registrationOrigin\": \"registrationOrigin71\",\r\n    \"marketingAgreement\": false,\r\n    \"newsletter\": false\r\n  },\r\n  \"companyName\": \"companyName59\",\r\n  \"emailAddress\": \"emailAddress73\",\r\n  \"phone\": {\r\n    \"countryCode\": \"countryCode93\",\r\n    \"areaCode\": \"areaCode98\",\r\n    \"number\": \"number92\"\r\n  },\r\n  \"mobile\": {\r\n    \"countryCode\": \"countryCode93\",\r\n    \"areaCode\": \"areaCode98\",\r\n    \"number\": \"number92\"\r\n  },\r\n  \"mainAddress\": {\r\n    \"countryIsoAlpha2Code\": \"countryIsoAlpha2Code55\",\r\n    \"postalCode\": \"postalCode53\",\r\n    \"city\": \"city49\",\r\n    \"street\": \"street94\",\r\n    \"street2\": \"street289\",\r\n    \"doorNumber\": \"doorNumber56\",\r\n    \"houseNumber\": \"houseNumber98\",\r\n    \"postAddressCode\": \"postAddressCode51\"\r\n  },\r\n  \"registrationSucceededCallbackUrl\": \"registrationSucceededCallbackUrl72\",\r\n  \"uid\": \"uid55\",\r\n  \"legalFormId\": 142,\r\n  \"organizationNumber\": \"organizationNumber0\",\r\n  \"sapDebitor\": \"sapDebitor75\"\r\n}",
+      "collectionId": "2a27a377-86ef-4e11-8c4f-3864c7b493ad",
+      "queryParams": [],
+      "headerData": [
+        {
+          "key": "Content-Type",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "key": "captchaToken",
+          "value": "captchaToken63",
+          "description": "This parameter is used to provide the captcha specific value for a token, solution or how else a parameter is called in a captcha solution."
+        },
+        {
+          "key": "Accept",
+          "value": "*/*"
+        }
+      ],
+      "pathVariableData": []
+    },
+    {
+      "folder": "661a20c2-ad9e-4a39-81ed-d27562be5586",
+      "id": "f23b12b6-05f0-40d4-97dd-97e48575f50e",
+      "name": "ResendRegistrationConfirmation",
+      "dataMode": "raw",
+      "dataDisabled": false,
+      "descriptionFormat": "markdown",
+      "description": "",
+      "headers": "Content-Type:application/json\r\nAccept:application/json\r\n",
+      "method": "POST",
+      "currentHelper": "",
+      "pathVariables": {},
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/doubleOptIn/initiate",
+      "responses": [
+        {
+          "request": "f23b12b6-05f0-40d4-97dd-97e48575f50e",
+          "id": "1bdc9bc4-2930-4b96-9dde-d1ef85884dcb",
+          "name": "Response_204",
+          "status": "Registration confirmation e-mail was sent.",
+          "responseCode": {
+            "code": 204,
+            "name": "204",
+            "detail": "Registration confirmation e-mail was sent."
+          },
+          "headers": [],
+          "language": "Text"
+        },
+        {
+          "request": "f23b12b6-05f0-40d4-97dd-97e48575f50e",
+          "id": "86d1c163-0b98-4338-bae7-fe3494280878",
+          "name": "Response_404",
+          "status": "User with username was not found.",
+          "responseCode": {
+            "code": 404,
+            "name": "404",
+            "detail": "User with username was not found."
+          },
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "mime": "application/json",
+          "text": "{\r\n  \"type\": \"type46\",\r\n  \"title\": \"title32\",\r\n  \"status\": 75,\r\n  \"detail\": \"detail75\",\r\n  \"instance\": \"instance23\",\r\n  \"error\": {\r\n    \"code\": \"code26\",\r\n    \"message\": \"message10\",\r\n    \"target\": \"target26\",\r\n    \"data\": [\r\n      {\r\n        \"name\": \"name35\",\r\n        \"value\": \"value22\"\r\n      }\r\n    ]\r\n  }\r\n}",
+          "language": "Text",
+          "rawDataType": "text"
+        }
+      ],
+      "rawModeData": "{\r\n  \"username\": \"username91\",\r\n  \"applicationName\": \"applicationName30\"\r\n}",
+      "collectionId": "2a27a377-86ef-4e11-8c4f-3864c7b493ad",
+      "queryParams": [],
+      "headerData": [
+        {
+          "key": "Content-Type",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "key": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "pathVariableData": []
+    },
+    {
+      "folder": "661a20c2-ad9e-4a39-81ed-d27562be5586",
+      "id": "6b3d94cd-2dd7-4a92-9198-3b24daf8c3d4",
+      "name": "ConfirmRegistration",
+      "dataMode": "raw",
+      "dataDisabled": false,
+      "descriptionFormat": "markdown",
+      "description": "",
+      "headers": "Content-Type:application/json\r\nAccept:application/json\r\n",
+      "method": "POST",
+      "currentHelper": "",
+      "pathVariables": {},
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/doubleOptIn/confirm",
+      "responses": [
+        {
+          "request": "6b3d94cd-2dd7-4a92-9198-3b24daf8c3d4",
+          "id": "9e728cbb-dc36-414c-9a8a-33e3373f137f",
+          "name": "Response_202",
+          "status": "Registration confirmation token accepted. Response contains callback URL.",
+          "responseCode": {
+            "code": 202,
+            "name": "202",
+            "detail": "Registration confirmation token accepted. Response contains callback URL."
+          },
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "mime": "application/json",
+          "text": "{\r\n  \"callbackUrl\": \"callbackUrl25\"\r\n}",
+          "language": "Text",
+          "rawDataType": "text"
+        }
+      ],
+      "rawModeData": "{\r\n  \"token\": \"token76\",\r\n  \"applicationName\": \"applicationName34\"\r\n}",
+      "collectionId": "2a27a377-86ef-4e11-8c4f-3864c7b493ad",
+      "queryParams": [],
+      "headerData": [
+        {
+          "key": "Content-Type",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "key": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "pathVariableData": []
+    },
+    {
+      "folder": "555784fa-625d-4506-92e5-75a645995c29",
+      "id": "bd7a48fa-8361-42e8-a10b-ae663486fc51",
+      "name": "CreateUser",
+      "dataMode": "raw",
+      "dataDisabled": false,
+      "descriptionFormat": "markdown",
+      "description": "",
+      "headers": "Content-Type:application/json\r\ncaptchaToken:captchaToken76\r\nAccept:*/*\r\n",
+      "method": "POST",
+      "currentHelper": "",
+      "pathVariables": {},
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/users",
+      "responses": [
+        {
+          "request": "bd7a48fa-8361-42e8-a10b-ae663486fc51",
+          "id": "c4a8bf9d-a51e-4dbf-81a8-a1c93c43fa90",
+          "name": "Response_200",
+          "status": "Success",
+          "responseCode": {
+            "code": 200,
+            "name": "200",
+            "detail": "Success"
+          },
+          "headers": [],
+          "language": "Text"
+        }
+      ],
+      "rawModeData": "{\r\n  \"password\": \"password64\",\r\n  \"username\": \"username84\",\r\n  \"salutation\": \"salutation13\",\r\n  \"firstname\": \"firstname82\",\r\n  \"lastname\": \"lastname87\",\r\n  \"birthdate\": \"2025-02-05T10:39:00.9077906Z\",\r\n  \"titleBeforeName\": \"titleBeforeName2\",\r\n  \"titleAfterName\": \"titleAfterName50\",\r\n  \"phone\": {\r\n    \"countryCode\": \"countryCode93\",\r\n    \"areaCode\": \"areaCode98\",\r\n    \"number\": \"number92\"\r\n  },\r\n  \"mobile\": {\r\n    \"countryCode\": \"countryCode93\",\r\n    \"areaCode\": \"areaCode98\",\r\n    \"number\": \"number92\"\r\n  },\r\n  \"addresses\": [\r\n    {\r\n      \"addressType\": 115,\r\n      \"countryIsoAlpha2Code\": \"countryIsoAlpha2Code42\",\r\n      \"postalCode\": \"postalCode19\",\r\n      \"city\": \"city22\",\r\n      \"street\": \"street48\",\r\n      \"street2\": \"street244\",\r\n      \"doorNumber\": \"doorNumber39\",\r\n      \"houseNumber\": \"houseNumber64\",\r\n      \"postAddressCode\": \"postAddressCode59\"\r\n    }\r\n  ],\r\n  \"registrationSucceededCallbackUrl\": \"registrationSucceededCallbackUrl52\",\r\n  \"registrationOrigin\": \"registrationOrigin71\",\r\n  \"marketingAgreement\": false,\r\n  \"newsletter\": false\r\n}",
+      "collectionId": "2a27a377-86ef-4e11-8c4f-3864c7b493ad",
+      "queryParams": [],
+      "headerData": [
+        {
+          "key": "Content-Type",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "key": "captchaToken",
+          "value": "captchaToken76",
+          "description": ""
+        },
+        {
+          "key": "Accept",
+          "value": "*/*"
+        }
+      ],
+      "pathVariableData": []
+    },
+    {
+      "folder": "f0da158d-d2bf-4d14-876e-3d625c493024",
+      "id": "7244590e-aedc-492d-9c0c-c0fc71534507",
+      "name": "ValidateUsername",
+      "dataMode": "raw",
+      "dataDisabled": false,
+      "descriptionFormat": "markdown",
+      "description": "",
+      "headers": "Content-Type:application/json\r\nAccept:application/json\r\n",
+      "method": "POST",
+      "currentHelper": "",
+      "pathVariables": {},
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/validations/validateUsername",
+      "responses": [
+        {
+          "request": "7244590e-aedc-492d-9c0c-c0fc71534507",
+          "id": "b850f59f-6bcb-48a6-a195-03b835447fd5",
+          "name": "Response_204",
+          "status": "Value is valid.",
+          "responseCode": {
+            "code": 204,
+            "name": "204",
+            "detail": "Value is valid."
+          },
+          "headers": [],
+          "language": "Text"
+        },
+        {
+          "request": "7244590e-aedc-492d-9c0c-c0fc71534507",
+          "id": "0e87e696-7870-445c-a494-1222455ff2bf",
+          "name": "Response_200",
+          "status": "Value is invalid. Main error code is validation_error.\r\n            Detailed validation error codes can be found in the details field.\r\n            There could be multiple errors.\r\n            \r\n            List of error codes in format [error code] - [description]:\r\n            \r\n            required -  Required field.\r\n            invalid - Invalid format, username should be an email address.\r\n            too_short - The input value is too short.\r\n            too_long - The input value is too long.\r\n            username_not_available - Username is already taken.",
+          "responseCode": {
+            "code": 200,
+            "name": "200",
+            "detail": "Value is invalid. Main error code is validation_error.\r\n            Detailed validation error codes can be found in the details field.\r\n            There could be multiple errors.\r\n            \r\n            List of error codes in format [error code] - [description]:\r\n            \r\n            required -  Required field.\r\n            invalid - Invalid format, username should be an email address.\r\n            too_short - The input value is too short.\r\n            too_long - The input value is too long.\r\n            username_not_available - Username is already taken."
+          },
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "mime": "application/json",
+          "text": "{\r\n  \"type\": \"type46\",\r\n  \"title\": \"title32\",\r\n  \"status\": 75,\r\n  \"detail\": \"detail75\",\r\n  \"instance\": \"instance23\",\r\n  \"error\": {\r\n    \"code\": \"code26\",\r\n    \"message\": \"message10\",\r\n    \"target\": \"target26\",\r\n    \"data\": [\r\n      {\r\n        \"name\": \"name35\",\r\n        \"value\": \"value22\"\r\n      }\r\n    ]\r\n  }\r\n}",
+          "language": "Text",
+          "rawDataType": "text"
+        }
+      ],
+      "rawModeData": "{\r\n  \"value\": \"value97\"\r\n}",
+      "collectionId": "2a27a377-86ef-4e11-8c4f-3864c7b493ad",
+      "queryParams": [],
+      "headerData": [
+        {
+          "key": "Content-Type",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "key": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "pathVariableData": []
+    },
+    {
+      "folder": "f0da158d-d2bf-4d14-876e-3d625c493024",
+      "id": "6b617603-d107-4cd2-be6b-fcfae329ba9c",
+      "name": "ValidateForDuplicateUser",
+      "dataMode": "raw",
+      "dataDisabled": false,
+      "descriptionFormat": "markdown",
+      "description": "",
+      "headers": "Content-Type:application/json\r\nAccept:application/json\r\n",
+      "method": "POST",
+      "currentHelper": "",
+      "pathVariables": {},
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/validations/validateDuplicateUser",
+      "responses": [
+        {
+          "request": "6b617603-d107-4cd2-be6b-fcfae329ba9c",
+          "id": "8deba1d0-325a-4c5d-b5c7-a2b1e2929264",
+          "name": "Response_204",
+          "status": "Data is valid, it is not a duplicate user.",
+          "responseCode": {
+            "code": 204,
+            "name": "204",
+            "detail": "Data is valid, it is not a duplicate user."
+          },
+          "headers": [],
+          "language": "Text"
+        },
+        {
+          "request": "6b617603-d107-4cd2-be6b-fcfae329ba9c",
+          "id": "9b7c536a-b48c-4014-a77b-e9a442e40e71",
+          "name": "Response_200",
+          "status": "Data is invalid, a user with the same data already exists. Main error code is validation_error.\r\n            Validation error code is duplicate_user",
+          "responseCode": {
+            "code": 200,
+            "name": "200",
+            "detail": "Data is invalid, a user with the same data already exists. Main error code is validation_error.\r\n            Validation error code is duplicate_user"
+          },
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "mime": "application/json",
+          "text": "{\r\n  \"type\": \"type46\",\r\n  \"title\": \"title32\",\r\n  \"status\": 75,\r\n  \"detail\": \"detail75\",\r\n  \"instance\": \"instance23\",\r\n  \"error\": {\r\n    \"code\": \"code26\",\r\n    \"message\": \"message10\",\r\n    \"target\": \"target26\",\r\n    \"data\": [\r\n      {\r\n        \"name\": \"name35\",\r\n        \"value\": \"value22\"\r\n      }\r\n    ]\r\n  }\r\n}",
+          "language": "Text",
+          "rawDataType": "text"
+        }
+      ],
+      "rawModeData": "{\r\n  \"firstname\": \"firstname30\",\r\n  \"lastname\": \"lastname4\",\r\n  \"ssoId\": 241,\r\n  \"mainAddress\": {\r\n    \"countryIsoAlpha2Code\": \"countryIsoAlpha2Code73\",\r\n    \"postalCode\": \"postalCode84\",\r\n    \"city\": \"city42\",\r\n    \"street\": \"street3\",\r\n    \"doorNumber\": \"doorNumber62\",\r\n    \"houseNumber\": \"houseNumber32\"\r\n  }\r\n}",
+      "collectionId": "2a27a377-86ef-4e11-8c4f-3864c7b493ad",
+      "queryParams": [],
+      "headerData": [
+        {
+          "key": "Content-Type",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "key": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "pathVariableData": []
+    }
+  ],
+  "variables": [],
+  "auth": {
+    "type": "noauth"
+  }
+}

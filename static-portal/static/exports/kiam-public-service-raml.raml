@@ -1,0 +1,2403 @@
+#%RAML 0.8
+title: Kiam Public Service
+version: 1.0.0
+baseUri: https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern
+protocols:
+- HTTPS
+baseUriParameters: {}
+schemas:
+- AddressForDuplicateValidation: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "AddressForDuplicateValidation",
+      "title": "AddressForDuplicateValidation",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "countryIsoAlpha2Code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postalCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "street": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "doorNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "houseNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- ConfirmRegistrationRequest: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "ConfirmRegistrationRequest",
+      "title": "ConfirmRegistrationRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "token": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "applicationName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- CreateAddressRequest: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "CreateAddressRequest",
+      "title": "CreateAddressRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "addressType": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "countryIsoAlpha2Code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postalCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "street": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "street2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "doorNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "houseNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postAddressCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- CreateCompanyRequest: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "CreateCompanyRequest",
+      "title": "CreateCompanyRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "user": {
+          "id": "CreateUserRequest",
+          "title": "CreateUserRequest",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "password": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "username": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "salutation": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "firstname": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "lastname": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "birthdate": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            },
+            "titleBeforeName": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "titleAfterName": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "phone": {
+              "id": "Phone2",
+              "title": "Phone2",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "countryCode": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "areaCode": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "mobile": {
+              "$ref": "Phone2"
+            },
+            "addresses": {
+              "description": "",
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "id": "CreateAddressRequest",
+                "title": "CreateAddressRequest",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "addressType": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "format": "int32"
+                  },
+                  "countryIsoAlpha2Code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "postalCode": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "city": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "street": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "street2": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "doorNumber": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "houseNumber": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "postAddressCode": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "registrationSucceededCallbackUrl": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "registrationOrigin": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "marketingAgreement": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "newsletter": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        },
+        "companyName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "emailAddress": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "$ref": "Phone2"
+        },
+        "mobile": {
+          "$ref": "Phone2"
+        },
+        "mainAddress": {
+          "id": "CreateMainAddressRequest",
+          "title": "CreateMainAddressRequest",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "countryIsoAlpha2Code": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postalCode": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "city": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "street": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "street2": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "doorNumber": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "houseNumber": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postAddressCode": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "registrationSucceededCallbackUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "uid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "legalFormId": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "organizationNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sapDebitor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- CreateMainAddressRequest: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "CreateMainAddressRequest",
+      "title": "CreateMainAddressRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "countryIsoAlpha2Code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postalCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "street": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "street2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "doorNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "houseNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postAddressCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- CreateUserRequest: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "CreateUserRequest",
+      "title": "CreateUserRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "password": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "username": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "salutation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "firstname": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastname": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "birthdate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "titleBeforeName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "titleAfterName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "id": "Phone2",
+          "title": "Phone2",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "countryCode": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "areaCode": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "number": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "mobile": {
+          "$ref": "Phone2"
+        },
+        "addresses": {
+          "description": "",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "id": "CreateAddressRequest",
+            "title": "CreateAddressRequest",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "addressType": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "int32"
+              },
+              "countryIsoAlpha2Code": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "postalCode": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "city": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "street": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "street2": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "doorNumber": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "houseNumber": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "postAddressCode": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "registrationSucceededCallbackUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "registrationOrigin": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "marketingAgreement": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "newsletter": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    }
+- Phone2: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "Phone2",
+      "title": "Phone2",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "countryCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "areaCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- RegistrationConfirmationResponse: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "RegistrationConfirmationResponse",
+      "title": "RegistrationConfirmationResponse",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "callbackUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- ResendRegistrationConfirmationRequest: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "ResendRegistrationConfirmationRequest",
+      "title": "ResendRegistrationConfirmationRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "username": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "applicationName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- StringFieldValue: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "StringFieldValue",
+      "title": "StringFieldValue",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- ValidateForDuplicateUserRequest: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "ValidateForDuplicateUserRequest",
+      "title": "ValidateForDuplicateUserRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "firstname": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastname": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ssoId": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "mainAddress": {
+          "id": "AddressForDuplicateValidation",
+          "title": "AddressForDuplicateValidation",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "countryIsoAlpha2Code": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "postalCode": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "city": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "street": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "doorNumber": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "houseNumber": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    }
+- KiamProblemDetails: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "KiamProblemDetails",
+      "title": "KiamProblemDetails",
+      "type": "object",
+      "additionalProperties": {},
+      "properties": {
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "detail": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "instance": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "error": {
+          "id": "Legacy.ErrorInfo",
+          "title": "Legacy.ErrorInfo",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "message": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "target": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "data": {
+              "description": "",
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "id": "Legacy.ErrorData",
+                "title": "Legacy.ErrorData",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+- Legacy.ErrorData: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "Legacy.ErrorData",
+      "title": "Legacy.ErrorData",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+- Legacy.ErrorInfo: |
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "Legacy.ErrorInfo",
+      "title": "Legacy.ErrorInfo",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "data": {
+          "description": "",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "id": "Legacy.ErrorData",
+            "title": "Legacy.ErrorData",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+/companies:
+  post:
+    headers:
+      Content-Type:
+        required: true
+        displayName: Content-Type
+        enum:
+        - application/json
+      captchaToken:
+        description: This parameter is used to provide the captcha specific value for a token, solution or how else a parameter is called in a captcha solution.
+        type: string
+        required: false
+        displayName: captchaToken
+    body:
+      application/json:
+        schema: |
+          {
+            "id": "CreateCompanyRequest",
+            "title": "CreateCompanyRequest",
+            "description": "Data of the newly created company and related user.\r\n             User salutation can have values M or W, M means male and W means female, X means other.\r\n             Possible values for users' address type: 1 or 2. 1 means main address, 2 means secondary address.\r\n             If password is not defined or is null, created user will receive an e-mail and will have to set password using received link.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "user": {
+                "id": "CreateUserRequest",
+                "title": "CreateUserRequest",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "password": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "username": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "salutation": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "firstname": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "lastname": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "birthdate": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  },
+                  "titleBeforeName": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "titleAfterName": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "phone": {
+                    "id": "Phone2",
+                    "title": "Phone2",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "countryCode": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "areaCode": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "number": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "mobile": {
+                    "$ref": "Phone2"
+                  },
+                  "addresses": {
+                    "description": "",
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "id": "CreateAddressRequest",
+                      "title": "CreateAddressRequest",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "addressType": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "format": "int32"
+                        },
+                        "countryIsoAlpha2Code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "postalCode": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "city": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "street": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "street2": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "doorNumber": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "houseNumber": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "postAddressCode": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "registrationSucceededCallbackUrl": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "registrationOrigin": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "marketingAgreement": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "newsletter": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "companyName": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "emailAddress": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "phone": {
+                "$ref": "Phone2"
+              },
+              "mobile": {
+                "$ref": "Phone2"
+              },
+              "mainAddress": {
+                "id": "CreateMainAddressRequest",
+                "title": "CreateMainAddressRequest",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "countryIsoAlpha2Code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "postalCode": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "city": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "street": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "street2": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "doorNumber": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "houseNumber": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "postAddressCode": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "registrationSucceededCallbackUrl": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "uid": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "legalFormId": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "int32"
+              },
+              "organizationNumber": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sapDebitor": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        example: ''
+    responses:
+      '200':
+        description: User was created successfully.
+      '400':
+        description: "Invalid request.\r\n            \r\n             Usual invalid request response format:\r\n             Error code is validation_error. Information about the error can be found in the details field.\r\n             Target describes which field is invalid, validation error code defines the more detailed validation error case.\r\n             There could be multiple errors per field. See example response.\r\n            \r\n             List of error codes in format [error code] - [optional description] - [fields which can have this validation error] for user fields and company fields:\r\n            \r\n             Company fields\r\n            \r\n             required - company_name\r\n             invalid - company_legal_form_id, company_email_address, company_phone_country_code, company_phone_area_code, company_phone_number, company_mobile_country_code, company_mobile_area_code, company_mobile_number, company_countryIsoAlpha2Code\r\n            \r\n             User fields\r\n             \r\n             required -  Required field. - username, first_name, last_name, registration_origin\r\n             username_not_available - Username is already taken. - username\r\n             too_short - The input value is too short. - username, first_name, last_name\r\n             too_long - The input value is too long. - username, first_name, last_name\r\n             no_titles_allowed - No titles allowed, E.g. BSc. - first_name, last_name\r\n             no_company_types_allowed - No company types allowed. E.g. GmbH. - first_name, last_name\r\n             person_too_young - Person with specified birthdate is too young. - birthdate\r\n             invalid - first_name, last_name, username, phone_country_code, phone_area_code, phone_number, mobile_country_code, mobile_area_code, mobile_number, user_addressX_countryIsoAlpha2Code (where X is the index of the address in the array, starting from 0, e.G. user_address0_countryIsoAlpha2Code)\r\n             new_password_invalid - the new password is invalid - password\r\n             captcha_error - Invalid Captcha token."
+/users:
+  post:
+    headers:
+      Content-Type:
+        required: true
+        displayName: Content-Type
+        enum:
+        - application/json
+      captchaToken:
+        type: string
+        required: false
+        displayName: captchaToken
+    body:
+      application/json:
+        schema: |
+          {
+            "id": "CreateUserRequest",
+            "title": "CreateUserRequest",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "password": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "username": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "salutation": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "firstname": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "lastname": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "birthdate": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "titleBeforeName": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "titleAfterName": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "phone": {
+                "id": "Phone2",
+                "title": "Phone2",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "countryCode": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "areaCode": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "number": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "mobile": {
+                "$ref": "Phone2"
+              },
+              "addresses": {
+                "description": "",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "id": "CreateAddressRequest",
+                  "title": "CreateAddressRequest",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "addressType": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int32"
+                    },
+                    "countryIsoAlpha2Code": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "postalCode": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "city": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "street": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "street2": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "doorNumber": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "houseNumber": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "postAddressCode": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              },
+              "registrationSucceededCallbackUrl": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "registrationOrigin": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "marketingAgreement": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "newsletter": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              }
+            }
+          }
+        example: ''
+    responses:
+      '200':
+        description: Success
+/doubleOptIn:
+  /initiate:
+    post:
+      headers:
+        Content-Type:
+          required: true
+          displayName: Content-Type
+          enum:
+          - application/json
+      body:
+        application/json:
+          schema: |
+            {
+              "id": "ResendRegistrationConfirmationRequest",
+              "title": "ResendRegistrationConfirmationRequest",
+              "description": "Request with username (email address) of the user.",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "username": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "applicationName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          example: ''
+      responses:
+        '204':
+          description: Registration confirmation e-mail was sent.
+        '404':
+          description: User with username was not found.
+          body:
+            application/json:
+              schema: |
+                {
+                  "id": "KiamProblemDetails",
+                  "title": "KiamProblemDetails",
+                  "type": "object",
+                  "additionalProperties": {},
+                  "properties": {
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "status": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "instance": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "error": {
+                      "id": "Legacy.ErrorInfo",
+                      "title": "Legacy.ErrorInfo",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "message": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "target": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "data": {
+                          "description": "",
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "id": "Legacy.ErrorData",
+                            "title": "Legacy.ErrorData",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+        '409':
+          description: An error occurred
+          body:
+            application/json:
+              schema: |
+                {
+                  "id": "KiamProblemDetails",
+                  "title": "KiamProblemDetails",
+                  "type": "object",
+                  "additionalProperties": {},
+                  "properties": {
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "status": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "instance": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "error": {
+                      "id": "Legacy.ErrorInfo",
+                      "title": "Legacy.ErrorInfo",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "message": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "target": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "data": {
+                          "description": "",
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "id": "Legacy.ErrorData",
+                            "title": "Legacy.ErrorData",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+  /confirm:
+    post:
+      headers:
+        Content-Type:
+          required: true
+          displayName: Content-Type
+          enum:
+          - application/json
+      body:
+        application/json:
+          schema: |
+            {
+              "id": "ConfirmRegistrationRequest",
+              "title": "ConfirmRegistrationRequest",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "token": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "applicationName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          example: ''
+      responses:
+        '202':
+          description: Registration confirmation token accepted. Response contains callback URL.
+          body:
+            application/json:
+              schema: |
+                {
+                  "id": "RegistrationConfirmationResponse",
+                  "title": "RegistrationConfirmationResponse",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "callbackUrl": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+        '200':
+          description: Invalid, expired or already used registration confirmation token.
+          body:
+            application/json:
+              schema: |
+                {
+                  "id": "KiamProblemDetails",
+                  "title": "KiamProblemDetails",
+                  "type": "object",
+                  "additionalProperties": {},
+                  "properties": {
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "status": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "instance": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "error": {
+                      "id": "Legacy.ErrorInfo",
+                      "title": "Legacy.ErrorInfo",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "message": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "target": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "data": {
+                          "description": "",
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "id": "Legacy.ErrorData",
+                            "title": "Legacy.ErrorData",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+/validations:
+  /validateUsername:
+    post:
+      headers:
+        Content-Type:
+          required: true
+          displayName: Content-Type
+          enum:
+          - application/json
+      body:
+        application/json:
+          schema: |
+            {
+              "id": "StringFieldValue",
+              "title": "StringFieldValue",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "value": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          example: ''
+      responses:
+        '204':
+          description: Value is valid.
+        '200':
+          description: "Value is invalid. Main error code is validation_error.\r\n            Detailed validation error codes can be found in the details field.\r\n            There could be multiple errors.\r\n            \r\n            List of error codes in format [error code] - [description]:\r\n            \r\n            required -  Required field.\r\n            invalid - Invalid format, username should be an email address.\r\n            too_short - The input value is too short.\r\n            too_long - The input value is too long.\r\n            username_not_available - Username is already taken."
+          body:
+            application/json:
+              schema: |
+                {
+                  "id": "KiamProblemDetails",
+                  "title": "KiamProblemDetails",
+                  "type": "object",
+                  "additionalProperties": {},
+                  "properties": {
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "status": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "instance": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "error": {
+                      "id": "Legacy.ErrorInfo",
+                      "title": "Legacy.ErrorInfo",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "message": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "target": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "data": {
+                          "description": "",
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "id": "Legacy.ErrorData",
+                            "title": "Legacy.ErrorData",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+        '400':
+          body:
+            application/json:
+              schema: |
+                {
+                  "id": "KiamProblemDetails",
+                  "title": "KiamProblemDetails",
+                  "type": "object",
+                  "additionalProperties": {},
+                  "properties": {
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "status": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "instance": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "error": {
+                      "id": "Legacy.ErrorInfo",
+                      "title": "Legacy.ErrorInfo",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "message": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "target": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "data": {
+                          "description": "",
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "id": "Legacy.ErrorData",
+                            "title": "Legacy.ErrorData",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+  /validateDuplicateUser:
+    post:
+      headers:
+        Content-Type:
+          required: true
+          displayName: Content-Type
+          enum:
+          - application/json
+      body:
+        application/json:
+          schema: |
+            {
+              "id": "ValidateForDuplicateUserRequest",
+              "title": "ValidateForDuplicateUserRequest",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "firstname": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "lastname": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "ssoId": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int32"
+                },
+                "mainAddress": {
+                  "id": "AddressForDuplicateValidation",
+                  "title": "AddressForDuplicateValidation",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "countryIsoAlpha2Code": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "postalCode": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "city": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "street": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "doorNumber": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "houseNumber": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          example: ''
+      responses:
+        '204':
+          description: Data is valid, it is not a duplicate user.
+        '200':
+          description: |
+            Data is invalid, a user with the same data already exists. Main error code is validation_error.
+
+                        Validation error code is duplicate_user
+          body:
+            application/json:
+              schema: |
+                {
+                  "id": "KiamProblemDetails",
+                  "title": "KiamProblemDetails",
+                  "type": "object",
+                  "additionalProperties": {},
+                  "properties": {
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "status": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "instance": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "error": {
+                      "id": "Legacy.ErrorInfo",
+                      "title": "Legacy.ErrorInfo",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "message": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "target": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "data": {
+                          "description": "",
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "id": "Legacy.ErrorData",
+                            "title": "Legacy.ErrorData",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+        '400':
+          description: Validation error code is duplicate_user
+          body:
+            application/json:
+              schema: |
+                {
+                  "id": "KiamProblemDetails",
+                  "title": "KiamProblemDetails",
+                  "type": "object",
+                  "additionalProperties": {},
+                  "properties": {
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "status": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "instance": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "error": {
+                      "id": "Legacy.ErrorInfo",
+                      "title": "Legacy.ErrorInfo",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "message": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "target": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "data": {
+                          "description": "",
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "id": "Legacy.ErrorData",
+                            "title": "Legacy.ErrorData",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }

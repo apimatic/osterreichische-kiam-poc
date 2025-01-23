@@ -1,0 +1,176 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_source": "apimatic.transformer",
+  "resources": [
+    {
+      "name": "Kiam Public Service",
+      "_type": "workspace",
+      "_id": "wrk_6b2275a854c74dcebeb04a85bf01c92c"
+    },
+    {
+      "name": "Company",
+      "_type": "request_group",
+      "_id": "fld_9414cdb3d3c24c21a7650632eb52ba29",
+      "parentId": "wrk_6b2275a854c74dcebeb04a85bf01c92c",
+      "description": ""
+    },
+    {
+      "name": "DoubleOptIn",
+      "_type": "request_group",
+      "_id": "fld_9eff1c005437483bafe6a7bcdac77228",
+      "parentId": "wrk_6b2275a854c74dcebeb04a85bf01c92c",
+      "description": ""
+    },
+    {
+      "name": "PublicUser",
+      "_type": "request_group",
+      "_id": "fld_375baf09ac2b446b9d3eae7a27257bc8",
+      "parentId": "wrk_6b2275a854c74dcebeb04a85bf01c92c",
+      "description": ""
+    },
+    {
+      "name": "Validations",
+      "_type": "request_group",
+      "_id": "fld_8ca4b3db652340ccb16fdf4e1ce095c8",
+      "parentId": "wrk_6b2275a854c74dcebeb04a85bf01c92c",
+      "description": ""
+    },
+    {
+      "name": "CreateCompanyWithBusinessUser",
+      "method": "POST",
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/companies",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n  \"user\": {\r\n    \"password\": \"password45\",\r\n    \"username\": \"username51\",\r\n    \"salutation\": \"salutation48\",\r\n    \"firstname\": \"firstname7\",\r\n    \"lastname\": \"lastname21\",\r\n    \"birthdate\": \"2025-05-01T10:39:01.0464263Z\",\r\n    \"titleBeforeName\": \"titleBeforeName15\",\r\n    \"titleAfterName\": \"titleAfterName88\",\r\n    \"phone\": {\r\n      \"countryCode\": \"countryCode58\",\r\n      \"areaCode\": \"areaCode82\",\r\n      \"number\": \"number79\"\r\n    },\r\n    \"mobile\": {\r\n      \"countryCode\": \"countryCode58\",\r\n      \"areaCode\": \"areaCode82\",\r\n      \"number\": \"number79\"\r\n    },\r\n    \"addresses\": [\r\n      {\r\n        \"addressType\": 22,\r\n        \"countryIsoAlpha2Code\": \"countryIsoAlpha2Code77\",\r\n        \"postalCode\": \"postalCode81\",\r\n        \"city\": \"city4\",\r\n        \"street\": \"street31\",\r\n        \"street2\": \"street251\",\r\n        \"doorNumber\": \"doorNumber87\",\r\n        \"houseNumber\": \"houseNumber18\",\r\n        \"postAddressCode\": \"postAddressCode48\"\r\n      }\r\n    ],\r\n    \"registrationSucceededCallbackUrl\": \"registrationSucceededCallbackUrl84\",\r\n    \"registrationOrigin\": \"registrationOrigin49\",\r\n    \"marketingAgreement\": true,\r\n    \"newsletter\": false\r\n  },\r\n  \"companyName\": \"companyName38\",\r\n  \"emailAddress\": \"emailAddress70\",\r\n  \"phone\": {\r\n    \"countryCode\": \"countryCode58\",\r\n    \"areaCode\": \"areaCode82\",\r\n    \"number\": \"number79\"\r\n  },\r\n  \"mobile\": {\r\n    \"countryCode\": \"countryCode58\",\r\n    \"areaCode\": \"areaCode82\",\r\n    \"number\": \"number79\"\r\n  },\r\n  \"mainAddress\": {\r\n    \"countryIsoAlpha2Code\": \"countryIsoAlpha2Code54\",\r\n    \"postalCode\": \"postalCode7\",\r\n    \"city\": \"city88\",\r\n    \"street\": \"street63\",\r\n    \"street2\": \"street253\",\r\n    \"doorNumber\": \"doorNumber70\",\r\n    \"houseNumber\": \"houseNumber68\",\r\n    \"postAddressCode\": \"postAddressCode43\"\r\n  },\r\n  \"registrationSucceededCallbackUrl\": \"registrationSucceededCallbackUrl56\",\r\n  \"uid\": \"uid20\",\r\n  \"legalFormId\": 143,\r\n  \"organizationNumber\": \"organizationNumber73\",\r\n  \"sapDebitor\": \"sapDebitor45\"\r\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "captchaToken",
+          "value": "captchaToken67",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req_b03e1eb679444d44bd21bf7b1354fe6c",
+      "parentId": "fld_9414cdb3d3c24c21a7650632eb52ba29",
+      "description": ""
+    },
+    {
+      "name": "ResendRegistrationConfirmation",
+      "method": "POST",
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/doubleOptIn/initiate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n  \"username\": \"username77\",\r\n  \"applicationName\": \"applicationName36\"\r\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req_422088486696459383b00cef13465e82",
+      "parentId": "fld_9eff1c005437483bafe6a7bcdac77228",
+      "description": ""
+    },
+    {
+      "name": "ConfirmRegistration",
+      "method": "POST",
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/doubleOptIn/confirm",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n  \"token\": \"token23\",\r\n  \"applicationName\": \"applicationName28\"\r\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req_0ae5fb78d3814d41afa4fb58a2e54ada",
+      "parentId": "fld_9eff1c005437483bafe6a7bcdac77228",
+      "description": ""
+    },
+    {
+      "name": "CreateUser",
+      "method": "POST",
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/users",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n  \"password\": \"password45\",\r\n  \"username\": \"username51\",\r\n  \"salutation\": \"salutation48\",\r\n  \"firstname\": \"firstname7\",\r\n  \"lastname\": \"lastname21\",\r\n  \"birthdate\": \"2025-05-01T10:39:01.0464263Z\",\r\n  \"titleBeforeName\": \"titleBeforeName15\",\r\n  \"titleAfterName\": \"titleAfterName88\",\r\n  \"phone\": {\r\n    \"countryCode\": \"countryCode58\",\r\n    \"areaCode\": \"areaCode82\",\r\n    \"number\": \"number79\"\r\n  },\r\n  \"mobile\": {\r\n    \"countryCode\": \"countryCode58\",\r\n    \"areaCode\": \"areaCode82\",\r\n    \"number\": \"number79\"\r\n  },\r\n  \"addresses\": [\r\n    {\r\n      \"addressType\": 22,\r\n      \"countryIsoAlpha2Code\": \"countryIsoAlpha2Code77\",\r\n      \"postalCode\": \"postalCode81\",\r\n      \"city\": \"city4\",\r\n      \"street\": \"street31\",\r\n      \"street2\": \"street251\",\r\n      \"doorNumber\": \"doorNumber87\",\r\n      \"houseNumber\": \"houseNumber18\",\r\n      \"postAddressCode\": \"postAddressCode48\"\r\n    }\r\n  ],\r\n  \"registrationSucceededCallbackUrl\": \"registrationSucceededCallbackUrl84\",\r\n  \"registrationOrigin\": \"registrationOrigin49\",\r\n  \"marketingAgreement\": true,\r\n  \"newsletter\": false\r\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "captchaToken",
+          "value": "captchaToken63",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req_41d6cba33d9e4199859aecc767b917af",
+      "parentId": "fld_375baf09ac2b446b9d3eae7a27257bc8",
+      "description": ""
+    },
+    {
+      "name": "ValidateUsername",
+      "method": "POST",
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/validations/validateUsername",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n  \"value\": \"value65\"\r\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req_bca9811754684e65904f37591afc04f6",
+      "parentId": "fld_8ca4b3db652340ccb16fdf4e1ce095c8",
+      "description": ""
+    },
+    {
+      "name": "ValidateForDuplicateUser",
+      "method": "POST",
+      "url": "https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/validations/validateDuplicateUser",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n  \"firstname\": \"firstname20\",\r\n  \"lastname\": \"lastname60\",\r\n  \"ssoId\": 156,\r\n  \"mainAddress\": {\r\n    \"countryIsoAlpha2Code\": \"countryIsoAlpha2Code85\",\r\n    \"postalCode\": \"postalCode80\",\r\n    \"city\": \"city81\",\r\n    \"street\": \"street55\",\r\n    \"doorNumber\": \"doorNumber96\",\r\n    \"houseNumber\": \"houseNumber62\"\r\n  }\r\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req_54799a0b26af4b2ba364fc35a0afd397",
+      "parentId": "fld_8ca4b3db652340ccb16fdf4e1ce095c8",
+      "description": ""
+    }
+  ]
+}

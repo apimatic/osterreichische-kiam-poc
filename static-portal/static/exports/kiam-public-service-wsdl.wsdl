@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:schemas="https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/schemas" xmlns:wsdl="https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/wsdl" targetNamespace="https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:tns="https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/schemas" targetNamespace="https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="POST_CreateCompanyWithBusinessUser_InputMessage" type="schemas:POST_CreateCompanyWithBusinessUser_InputMessage" />
+      <xs:element name="POST_CreateCompanyWithBusinessUser_OutputMessage" type="schemas:POST_CreateCompanyWithBusinessUser_OutputMessage" />
+      <xs:element name="POST_CreateCompanyWithBusinessUser_400" type="schemas:POST_CreateCompanyWithBusinessUser_400" />
+      <xs:element name="POST_ResendRegistrationConfirmation_InputMessage" type="schemas:POST_ResendRegistrationConfirmation_InputMessage" />
+      <xs:element name="POST_ResendRegistrationConfirmation_OutputMessage" type="schemas:POST_ResendRegistrationConfirmation_OutputMessage" />
+      <xs:element name="POST_ResendRegistrationConfirmation_404" type="schemas:POST_ResendRegistrationConfirmation_404" />
+      <xs:element name="POST_ResendRegistrationConfirmation_409" type="schemas:POST_ResendRegistrationConfirmation_409" />
+      <xs:element name="POST_ConfirmRegistration_InputMessage" type="schemas:POST_ConfirmRegistration_InputMessage" />
+      <xs:element name="POST_ConfirmRegistration_OutputMessage" type="schemas:POST_ConfirmRegistration_OutputMessage" />
+      <xs:element name="POST_CreateUser_InputMessage" type="schemas:POST_CreateUser_InputMessage" />
+      <xs:element name="POST_CreateUser_OutputMessage" type="schemas:POST_CreateUser_OutputMessage" />
+      <xs:element name="POST_ValidateUsername_InputMessage" type="schemas:POST_ValidateUsername_InputMessage" />
+      <xs:element name="POST_ValidateUsername_OutputMessage" type="schemas:POST_ValidateUsername_OutputMessage" />
+      <xs:element name="POST_ValidateUsername_400" type="schemas:POST_ValidateUsername_400" />
+      <xs:element name="POST_ValidateForDuplicateUser_InputMessage" type="schemas:POST_ValidateForDuplicateUser_InputMessage" />
+      <xs:element name="POST_ValidateForDuplicateUser_OutputMessage" type="schemas:POST_ValidateForDuplicateUser_OutputMessage" />
+      <xs:element name="POST_ValidateForDuplicateUser_400" type="schemas:POST_ValidateForDuplicateUser_400" />
+      <xs:complexType name="AddressForDuplicateValidation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="countryIsoAlpha2Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="postalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="street" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="doorNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="houseNumber" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ConfirmRegistrationRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="token" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="applicationName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CreateAddressRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="addressType" nillable="true" type="xs:integer" />
+          <xs:element minOccurs="0" name="countryIsoAlpha2Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="postalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="street" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="street2" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="doorNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="houseNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="postAddressCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CreateCompanyRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user" type="schemas:CreateUserRequest" />
+          <xs:element minOccurs="0" name="companyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="emailAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="phone" type="schemas:Phone2" />
+          <xs:element minOccurs="0" name="mobile" type="schemas:Phone2" />
+          <xs:element minOccurs="0" name="mainAddress" type="schemas:CreateMainAddressRequest" />
+          <xs:element minOccurs="0" name="registrationSucceededCallbackUrl" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="uid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="legalFormId" nillable="true" type="xs:integer" />
+          <xs:element minOccurs="0" name="organizationNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="sapDebitor" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CreateMainAddressRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="countryIsoAlpha2Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="postalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="street" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="street2" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="doorNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="houseNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="postAddressCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CreateUserRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="salutation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="birthdate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="titleBeforeName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="titleAfterName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="phone" type="schemas:Phone2" />
+          <xs:element minOccurs="0" name="mobile" type="schemas:Phone2" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="addresses" nillable="true" type="schemas:CreateAddressRequest" />
+          <xs:element minOccurs="0" name="registrationSucceededCallbackUrl" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="registrationOrigin" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="marketingAgreement" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="newsletter" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Phone2">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="countryCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="areaCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RegistrationConfirmationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="callbackUrl" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResendRegistrationConfirmationRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="applicationName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="StringFieldValue">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ValidateForDuplicateUserRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ssoId" nillable="true" type="xs:integer" />
+          <xs:element minOccurs="0" name="mainAddress" type="schemas:AddressForDuplicateValidation" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="KiamProblemDetails">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:integer" />
+          <xs:element minOccurs="0" name="detail" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="instance" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="error" type="schemas:Legacy.ErrorInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Legacy.ErrorData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Legacy.ErrorInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="target" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="data" nillable="true" type="schemas:Legacy.ErrorData" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_CreateCompanyWithBusinessUser_InputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" fixed="application/json" name="Content-Type" type="xs:string" />
+          <xs:element minOccurs="0" name="captchaToken" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>This parameter is used to provide the captcha specific value for a token, solution or how else a parameter is called in a captcha solution.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="body" type="schemas:CreateCompanyRequest">
+            <xs:annotation>
+              <xs:documentation>Data of the newly created company and related user.User salutation can have values M or W, M means male and W means female, X means other.Possible values for users' address type: 1 or 2. 1 means main address, 2 means secondary address.If password is not defined or is null, created user will receive an e-mail and will have to set password using received link.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_CreateCompanyWithBusinessUser_OutputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response200">
+            <xs:annotation>
+              <xs:documentation>User was created successfully.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_CreateCompanyWithBusinessUser_400">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response400">
+            <xs:annotation>
+              <xs:documentation>Invalid request.Usual invalid request response format:Error code is validation_error. Information about the error can be found in the details field.Target describes which field is invalid, validation error code defines the more detailed validation error case.There could be multiple errors per field. See example response.List of error codes in format [error code] - [optional description] - [fields which can have this validation error] for user fields and company fields:Company fieldsrequired - company_nameinvalid - company_legal_form_id, company_email_address, company_phone_country_code, company_phone_area_code, company_phone_number, company_mobile_country_code, company_mobile_area_code, company_mobile_number, company_countryIsoAlpha2CodeUser fieldsrequired -  Required field. - username, first_name, last_name, registration_originusername_not_available - Username is already taken. - usernametoo_short - The input value is too short. - username, first_name, last_nametoo_long - The input value is too long. - username, first_name, last_nameno_titles_allowed - No titles allowed, E.g. BSc. - first_name, last_nameno_company_types_allowed - No company types allowed. E.g. GmbH. - first_name, last_nameperson_too_young - Person with specified birthdate is too young. - birthdateinvalid - first_name, last_name, username, phone_country_code, phone_area_code, phone_number, mobile_country_code, mobile_area_code, mobile_number, user_addressX_countryIsoAlpha2Code (where X is the index of the address in the array, starting from 0, e.G. user_address0_countryIsoAlpha2Code)new_password_invalid - the new password is invalid - passwordcaptcha_error - Invalid Captcha token.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ResendRegistrationConfirmation_InputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" fixed="application/json" name="Content-Type" type="xs:string" />
+          <xs:element minOccurs="0" name="body" type="schemas:ResendRegistrationConfirmationRequest">
+            <xs:annotation>
+              <xs:documentation>Request with username (email address) of the user.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ResendRegistrationConfirmation_OutputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response204">
+            <xs:annotation>
+              <xs:documentation>Registration confirmation e-mail was sent.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ResendRegistrationConfirmation_404">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response404" type="schemas:KiamProblemDetails">
+            <xs:annotation>
+              <xs:documentation>User with username was not found.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ResendRegistrationConfirmation_409">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response409" type="schemas:KiamProblemDetails">
+            <xs:annotation>
+              <xs:documentation>An error occurred</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ConfirmRegistration_InputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" fixed="application/json" name="Content-Type" type="xs:string" />
+          <xs:element minOccurs="0" name="body" type="schemas:ConfirmRegistrationRequest" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ConfirmRegistration_OutputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response202" type="schemas:RegistrationConfirmationResponse">
+            <xs:annotation>
+              <xs:documentation>Registration confirmation token accepted. Response contains callback URL.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_CreateUser_InputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" fixed="application/json" name="Content-Type" type="xs:string" />
+          <xs:element minOccurs="0" name="captchaToken" type="xs:string" />
+          <xs:element minOccurs="0" name="body" type="schemas:CreateUserRequest" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_CreateUser_OutputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response200">
+            <xs:annotation>
+              <xs:documentation>Success</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ValidateUsername_InputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" fixed="application/json" name="Content-Type" type="xs:string" />
+          <xs:element minOccurs="0" name="body" type="schemas:StringFieldValue" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ValidateUsername_OutputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response204">
+            <xs:annotation>
+              <xs:documentation>Value is valid.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ValidateUsername_400">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response400" type="schemas:KiamProblemDetails" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ValidateForDuplicateUser_InputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" fixed="application/json" name="Content-Type" type="xs:string" />
+          <xs:element minOccurs="0" name="body" type="schemas:ValidateForDuplicateUserRequest" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ValidateForDuplicateUser_OutputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response204">
+            <xs:annotation>
+              <xs:documentation>Data is valid, it is not a duplicate user.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="POST_ValidateForDuplicateUser_400">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response400" type="schemas:KiamProblemDetails">
+            <xs:annotation>
+              <xs:documentation>Validation error code is duplicate_user</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="POST_CreateCompanyWithBusinessUser_InputMessage">
+    <part name="POST_CreateCompanyWithBusinessUser_InputMessage" element="schemas:POST_CreateCompanyWithBusinessUser_InputMessage" />
+  </message>
+  <message name="POST_CreateCompanyWithBusinessUser_OutputMessage">
+    <part name="POST_CreateCompanyWithBusinessUser_OutputMessage" element="schemas:POST_CreateCompanyWithBusinessUser_OutputMessage" />
+  </message>
+  <message name="POST_CreateCompanyWithBusinessUser_400">
+    <part name="POST_CreateCompanyWithBusinessUser_400" element="schemas:POST_CreateCompanyWithBusinessUser_400" />
+  </message>
+  <message name="POST_ResendRegistrationConfirmation_InputMessage">
+    <part name="POST_ResendRegistrationConfirmation_InputMessage" element="schemas:POST_ResendRegistrationConfirmation_InputMessage" />
+  </message>
+  <message name="POST_ResendRegistrationConfirmation_OutputMessage">
+    <part name="POST_ResendRegistrationConfirmation_OutputMessage" element="schemas:POST_ResendRegistrationConfirmation_OutputMessage" />
+  </message>
+  <message name="POST_ResendRegistrationConfirmation_404">
+    <part name="POST_ResendRegistrationConfirmation_404" element="schemas:POST_ResendRegistrationConfirmation_404" />
+  </message>
+  <message name="POST_ResendRegistrationConfirmation_409">
+    <part name="POST_ResendRegistrationConfirmation_409" element="schemas:POST_ResendRegistrationConfirmation_409" />
+  </message>
+  <message name="POST_ConfirmRegistration_InputMessage">
+    <part name="POST_ConfirmRegistration_InputMessage" element="schemas:POST_ConfirmRegistration_InputMessage" />
+  </message>
+  <message name="POST_ConfirmRegistration_OutputMessage">
+    <part name="POST_ConfirmRegistration_OutputMessage" element="schemas:POST_ConfirmRegistration_OutputMessage" />
+  </message>
+  <message name="POST_CreateUser_InputMessage">
+    <part name="POST_CreateUser_InputMessage" element="schemas:POST_CreateUser_InputMessage" />
+  </message>
+  <message name="POST_CreateUser_OutputMessage">
+    <part name="POST_CreateUser_OutputMessage" element="schemas:POST_CreateUser_OutputMessage" />
+  </message>
+  <message name="POST_ValidateUsername_InputMessage">
+    <part name="POST_ValidateUsername_InputMessage" element="schemas:POST_ValidateUsername_InputMessage" />
+  </message>
+  <message name="POST_ValidateUsername_OutputMessage">
+    <part name="POST_ValidateUsername_OutputMessage" element="schemas:POST_ValidateUsername_OutputMessage" />
+  </message>
+  <message name="POST_ValidateUsername_400">
+    <part name="POST_ValidateUsername_400" element="schemas:POST_ValidateUsername_400" />
+  </message>
+  <message name="POST_ValidateForDuplicateUser_InputMessage">
+    <part name="POST_ValidateForDuplicateUser_InputMessage" element="schemas:POST_ValidateForDuplicateUser_InputMessage" />
+  </message>
+  <message name="POST_ValidateForDuplicateUser_OutputMessage">
+    <part name="POST_ValidateForDuplicateUser_OutputMessage" element="schemas:POST_ValidateForDuplicateUser_OutputMessage" />
+  </message>
+  <message name="POST_ValidateForDuplicateUser_400">
+    <part name="POST_ValidateForDuplicateUser_400" element="schemas:POST_ValidateForDuplicateUser_400" />
+  </message>
+  <portType name="Kiam_x0020_Public_x0020_Service_PortType">
+    <operation name="POST_CreateCompanyWithBusinessUser">
+      <documentation />
+      <input message="wsdl:POST_CreateCompanyWithBusinessUser_InputMessage" />
+      <output message="wsdl:POST_CreateCompanyWithBusinessUser_OutputMessage">
+        <documentation>User was created successfully.</documentation>
+      </output>
+      <fault name="POST_CreateCompanyWithBusinessUser_400" message="wsdl:POST_CreateCompanyWithBusinessUser_400">
+        <documentation>Invalid request.
+            
+             Usual invalid request response format:
+             Error code is validation_error. Information about the error can be found in the details field.
+             Target describes which field is invalid, validation error code defines the more detailed validation error case.
+             There could be multiple errors per field. See example response.
+            
+             List of error codes in format [error code] - [optional description] - [fields which can have this validation error] for user fields and company fields:
+            
+             Company fields
+            
+             required - company_name
+             invalid - company_legal_form_id, company_email_address, company_phone_country_code, company_phone_area_code, company_phone_number, company_mobile_country_code, company_mobile_area_code, company_mobile_number, company_countryIsoAlpha2Code
+            
+             User fields
+             
+             required -  Required field. - username, first_name, last_name, registration_origin
+             username_not_available - Username is already taken. - username
+             too_short - The input value is too short. - username, first_name, last_name
+             too_long - The input value is too long. - username, first_name, last_name
+             no_titles_allowed - No titles allowed, E.g. BSc. - first_name, last_name
+             no_company_types_allowed - No company types allowed. E.g. GmbH. - first_name, last_name
+             person_too_young - Person with specified birthdate is too young. - birthdate
+             invalid - first_name, last_name, username, phone_country_code, phone_area_code, phone_number, mobile_country_code, mobile_area_code, mobile_number, user_addressX_countryIsoAlpha2Code (where X is the index of the address in the array, starting from 0, e.G. user_address0_countryIsoAlpha2Code)
+             new_password_invalid - the new password is invalid - password
+             captcha_error - Invalid Captcha token.</documentation>
+      </fault>
+    </operation>
+    <operation name="POST_ResendRegistrationConfirmation">
+      <documentation />
+      <input message="wsdl:POST_ResendRegistrationConfirmation_InputMessage" />
+      <output message="wsdl:POST_ResendRegistrationConfirmation_OutputMessage">
+        <documentation>Registration confirmation e-mail was sent.</documentation>
+      </output>
+      <fault name="POST_ResendRegistrationConfirmation_404" message="wsdl:POST_ResendRegistrationConfirmation_404">
+        <documentation>User with username was not found.</documentation>
+      </fault>
+      <fault name="POST_ResendRegistrationConfirmation_409" message="wsdl:POST_ResendRegistrationConfirmation_409">
+        <documentation>An error occurred</documentation>
+      </fault>
+    </operation>
+    <operation name="POST_ConfirmRegistration">
+      <documentation />
+      <input message="wsdl:POST_ConfirmRegistration_InputMessage" />
+      <output message="wsdl:POST_ConfirmRegistration_OutputMessage">
+        <documentation>Registration confirmation token accepted. Response contains callback URL.</documentation>
+      </output>
+    </operation>
+    <operation name="POST_CreateUser">
+      <documentation />
+      <input message="wsdl:POST_CreateUser_InputMessage" />
+      <output message="wsdl:POST_CreateUser_OutputMessage">
+        <documentation>Success</documentation>
+      </output>
+    </operation>
+    <operation name="POST_ValidateUsername">
+      <documentation />
+      <input message="wsdl:POST_ValidateUsername_InputMessage" />
+      <output message="wsdl:POST_ValidateUsername_OutputMessage">
+        <documentation>Value is valid.</documentation>
+      </output>
+      <fault name="POST_ValidateUsername_400" message="wsdl:POST_ValidateUsername_400">
+        <documentation />
+      </fault>
+    </operation>
+    <operation name="POST_ValidateForDuplicateUser">
+      <documentation />
+      <input message="wsdl:POST_ValidateForDuplicateUser_InputMessage" />
+      <output message="wsdl:POST_ValidateForDuplicateUser_OutputMessage">
+        <documentation>Data is valid, it is not a duplicate user.</documentation>
+      </output>
+      <fault name="POST_ValidateForDuplicateUser_400" message="wsdl:POST_ValidateForDuplicateUser_400">
+        <documentation>Validation error code is duplicate_user</documentation>
+      </fault>
+    </operation>
+  </portType>
+  <binding name="Kiam_x0020_Public_x0020_Service_Binding" type="wsdl:Kiam_x0020_Public_x0020_Service_PortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="POST_CreateCompanyWithBusinessUser">
+      <soap:operation soapAction="POST_CreateCompanyWithBusinessUser" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+      <fault name="POST_CreateCompanyWithBusinessUser_400">
+        <soap:fault use="literal" name="POST_CreateCompanyWithBusinessUser_400" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+    </operation>
+    <operation name="POST_ResendRegistrationConfirmation">
+      <soap:operation soapAction="POST_ResendRegistrationConfirmation" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+      <fault name="POST_ResendRegistrationConfirmation_404">
+        <soap:fault use="literal" name="POST_ResendRegistrationConfirmation_404" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+      <fault name="POST_ResendRegistrationConfirmation_409">
+        <soap:fault use="literal" name="POST_ResendRegistrationConfirmation_409" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+    </operation>
+    <operation name="POST_ConfirmRegistration">
+      <soap:operation soapAction="POST_ConfirmRegistration" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="POST_CreateUser">
+      <soap:operation soapAction="POST_CreateUser" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="POST_ValidateUsername">
+      <soap:operation soapAction="POST_ValidateUsername" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+      <fault name="POST_ValidateUsername_400">
+        <soap:fault use="literal" name="POST_ValidateUsername_400" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+    </operation>
+    <operation name="POST_ValidateForDuplicateUser">
+      <soap:operation soapAction="POST_ValidateForDuplicateUser" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+      <fault name="POST_ValidateForDuplicateUser_400">
+        <soap:fault use="literal" name="POST_ValidateForDuplicateUser_400" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="Kiam_x0020_Public_x0020_Service">
+    <documentation />
+    <port name="default_Port" binding="wsdl:Kiam_x0020_Public_x0020_Service_Binding">
+      <soap:address location="https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

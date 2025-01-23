@@ -18,6 +18,9 @@ jobs:
       
     - name: Zip files
       run: zip -qq -r portal-input.zip . -x '/.git/*' '/.github/*'
+
+    - name: list
+      run: ls
       
     # Call Apimatic Endpoint to generate Portal
     - name: Call build endpoint
@@ -36,7 +39,7 @@ jobs:
 
     - name: Extract generated Portal
       if: ${{steps.generate-portal.outputs.HTTP_CODE == '200'}}
-      run: unzip -qq portal.zip -d static-portal
+      run: unzip -qq portal -d static-portal
     
     - name: list
       run: ls

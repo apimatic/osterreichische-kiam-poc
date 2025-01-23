@@ -1,0 +1,371 @@
+_type: export
+__export_format: 4
+__export_source: apimatic.transformer
+resources:
+- name: Kiam Public Service
+  _type: workspace
+  _id: wrk_77f98e0580894423af761281431c0f8a
+- name: Company
+  _type: request_group
+  _id: fld_c7869f09ebce404dbba6861876b360ea
+  parentId: wrk_77f98e0580894423af761281431c0f8a
+  description: ''
+- name: DoubleOptIn
+  _type: request_group
+  _id: fld_3863f5be4f2741a1bca2215b0d822ba4
+  parentId: wrk_77f98e0580894423af761281431c0f8a
+  description: ''
+- name: PublicUser
+  _type: request_group
+  _id: fld_74071b9d79734f949c805c1c2ea04560
+  parentId: wrk_77f98e0580894423af761281431c0f8a
+  description: ''
+- name: Validations
+  _type: request_group
+  _id: fld_f1c0e74e1edb426a87cf6854e9e6cb1e
+  parentId: wrk_77f98e0580894423af761281431c0f8a
+  description: ''
+- name: CreateCompanyWithBusinessUser
+  method: POST
+  url: https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/companies
+  body:
+    mimeType: application/json
+    text: >-
+      {
+
+        "user": {
+
+          "password": "password90",
+
+          "username": "username75",
+
+          "salutation": "salutation34",
+
+          "firstname": "firstname18",
+
+          "lastname": "lastname22",
+
+          "birthdate": "2025-02-19T10:39:01.0483241Z",
+
+          "titleBeforeName": "titleBeforeName11",
+
+          "titleAfterName": "titleAfterName57",
+
+          "phone": {
+
+            "countryCode": "countryCode67",
+
+            "areaCode": "areaCode76",
+
+            "number": "number50"
+
+          },
+
+          "mobile": {
+
+            "countryCode": "countryCode67",
+
+            "areaCode": "areaCode76",
+
+            "number": "number50"
+
+          },
+
+          "addresses": [
+
+            {
+
+              "addressType": 46,
+
+              "countryIsoAlpha2Code": "countryIsoAlpha2Code16",
+
+              "postalCode": "postalCode20",
+
+              "city": "city57",
+
+              "street": "street50",
+
+              "street2": "street270",
+
+              "doorNumber": "doorNumber64",
+
+              "houseNumber": "houseNumber6",
+
+              "postAddressCode": "postAddressCode39"
+
+            }
+
+          ],
+
+          "registrationSucceededCallbackUrl": "registrationSucceededCallbackUrl82",
+
+          "registrationOrigin": "registrationOrigin29",
+
+          "marketingAgreement": true,
+
+          "newsletter": false
+
+        },
+
+        "companyName": "companyName47",
+
+        "emailAddress": "emailAddress18",
+
+        "phone": {
+
+          "countryCode": "countryCode67",
+
+          "areaCode": "areaCode76",
+
+          "number": "number50"
+
+        },
+
+        "mobile": {
+
+          "countryCode": "countryCode67",
+
+          "areaCode": "areaCode76",
+
+          "number": "number50"
+
+        },
+
+        "mainAddress": {
+
+          "countryIsoAlpha2Code": "countryIsoAlpha2Code72",
+
+          "postalCode": "postalCode4",
+
+          "city": "city27",
+
+          "street": "street22",
+
+          "street2": "street285",
+
+          "doorNumber": "doorNumber94",
+
+          "houseNumber": "houseNumber5",
+
+          "postAddressCode": "postAddressCode9"
+
+        },
+
+        "registrationSucceededCallbackUrl": "registrationSucceededCallbackUrl77",
+
+        "uid": "uid73",
+
+        "legalFormId": 107,
+
+        "organizationNumber": "organizationNumber75",
+
+        "sapDebitor": "sapDebitor69"
+
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: captchaToken
+    value: captchaToken53
+    disabled: false
+  authentication: {}
+  _type: request
+  _id: req_ecab198aba124948a4611d66143fb5f9
+  parentId: fld_c7869f09ebce404dbba6861876b360ea
+  description: ''
+- name: ResendRegistrationConfirmation
+  method: POST
+  url: https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/doubleOptIn/initiate
+  body:
+    mimeType: application/json
+    text: >-
+      {
+
+        "username": "username9",
+
+        "applicationName": "applicationName79"
+
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  authentication: {}
+  _type: request
+  _id: req_3d08059d543e438e894f018ef1208e50
+  parentId: fld_3863f5be4f2741a1bca2215b0d822ba4
+  description: ''
+- name: ConfirmRegistration
+  method: POST
+  url: https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/doubleOptIn/confirm
+  body:
+    mimeType: application/json
+    text: >-
+      {
+
+        "token": "token24",
+
+        "applicationName": "applicationName27"
+
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  authentication: {}
+  _type: request
+  _id: req_0539e97fc09c4d589f77c30242d60e33
+  parentId: fld_3863f5be4f2741a1bca2215b0d822ba4
+  description: ''
+- name: CreateUser
+  method: POST
+  url: https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/users
+  body:
+    mimeType: application/json
+    text: >-
+      {
+
+        "password": "password90",
+
+        "username": "username75",
+
+        "salutation": "salutation34",
+
+        "firstname": "firstname18",
+
+        "lastname": "lastname22",
+
+        "birthdate": "2025-02-19T10:39:01.0483241Z",
+
+        "titleBeforeName": "titleBeforeName11",
+
+        "titleAfterName": "titleAfterName57",
+
+        "phone": {
+
+          "countryCode": "countryCode67",
+
+          "areaCode": "areaCode76",
+
+          "number": "number50"
+
+        },
+
+        "mobile": {
+
+          "countryCode": "countryCode67",
+
+          "areaCode": "areaCode76",
+
+          "number": "number50"
+
+        },
+
+        "addresses": [
+
+          {
+
+            "addressType": 46,
+
+            "countryIsoAlpha2Code": "countryIsoAlpha2Code16",
+
+            "postalCode": "postalCode20",
+
+            "city": "city57",
+
+            "street": "street50",
+
+            "street2": "street270",
+
+            "doorNumber": "doorNumber64",
+
+            "houseNumber": "houseNumber6",
+
+            "postAddressCode": "postAddressCode39"
+
+          }
+
+        ],
+
+        "registrationSucceededCallbackUrl": "registrationSucceededCallbackUrl82",
+
+        "registrationOrigin": "registrationOrigin29",
+
+        "marketingAgreement": true,
+
+        "newsletter": false
+
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: captchaToken
+    value: captchaToken68
+    disabled: false
+  authentication: {}
+  _type: request
+  _id: req_e7469e9235fc41c2848128647fdaa243
+  parentId: fld_74071b9d79734f949c805c1c2ea04560
+  description: ''
+- name: ValidateUsername
+  method: POST
+  url: https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/validations/validateUsername
+  body:
+    mimeType: application/json
+    text: >-
+      {
+
+        "value": "value37"
+
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  authentication: {}
+  _type: request
+  _id: req_0f14fcdbccad439c97e38551addd9149
+  parentId: fld_f1c0e74e1edb426a87cf6854e9e6cb1e
+  description: ''
+- name: ValidateForDuplicateUser
+  method: POST
+  url: https://kiamservice-public.prod.kiam.postag.azureabnprod.postag.intern/validations/validateDuplicateUser
+  body:
+    mimeType: application/json
+    text: >-
+      {
+
+        "firstname": "firstname44",
+
+        "lastname": "lastname30",
+
+        "ssoId": 36,
+
+        "mainAddress": {
+
+          "countryIsoAlpha2Code": "countryIsoAlpha2Code17",
+
+          "postalCode": "postalCode57",
+
+          "city": "city92",
+
+          "street": "street28",
+
+          "doorNumber": "doorNumber59",
+
+          "houseNumber": "houseNumber50"
+
+        }
+
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  authentication: {}
+  _type: request
+  _id: req_945b246f264a4cea95affc7363b75afb
+  parentId: fld_f1c0e74e1edb426a87cf6854e9e6cb1e
+  description: ''
